@@ -14,9 +14,9 @@ How Ouija_Bencode Handles Them
 Decoding Bencoded Data
 The project includes a decoder that parses Torrent Files and extracts their data into a vector of unsigned char to correctly handle binary data. The decoded data is then written to an info file, including the calculated info-hash.
 here is the code for the decode function 
-''''
+```
       std::map<std::string, bencodeelement> ouija::decode_dict(std::vector<unsigned char> &encoded_data, size_t & position)
-{
+      {
     //map
     std::map<std::string, bencodeelement> decoded_element;
     //skip the d
@@ -58,8 +58,8 @@ here is the code for the decode function
     //skip the e
     position++;
     return decoded_element;
-    }
-''''
+      }
+```
 You can view how each function decodes it's specific data type in the 
 
 **Handling Bencode Elements**
@@ -69,7 +69,7 @@ I created a class specified for handling all the bencode elements, from string, 
 **Handling the Info-Hash**
 Required by the bittorrent protocol, every torrent file is uniquely identified by it's Info Hash, which is an SHA-1 encoded version of the bencoded "info" dictionary. 
 here is a snippet of the encryping info-hash function, which utilizes the openssl library for the SHA-1 encoding and a file created by me which is an encoder that re-encodes decoded data back to bencode format
-''''
+```
       std::string encrpyt_info_hash(std::map<std::string, bencodeelement> info_dict)
 {
     std::vector <unsigned char> serialized_info = ouija::encode_dict(info_dict);
@@ -82,7 +82,7 @@ here is a snippet of the encryping info-hash function, which utilizes the openss
     }
     return ss.str();
 }
-''''
+```
 
 **How to Use?**
 
